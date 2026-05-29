@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Connections from "./pages/Connections";
 import PreferenceForm from "./components/PreferenceForm";
+import api from "./api";
 import "./App.css";
 
 function AppContent() {
@@ -26,17 +27,11 @@ function AppContent() {
       // Verify token is valid by making an API call
       const verifyToken = async () => {
         try {
-          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/profile`, {
-            headers: {
-              'Authorization': `Bearer ${token}`
-            }
-          });
-          if (response.ok) {
-            const userData = await response.json();
+          const response = await api.get("/api/users/profile");
+          if (response.data) {
             setIsAuthenticated(true);
-            setUser(userData);
+            setUser(response.data);
           } else {
-            // Token is invalid, remove it
             localStorage.removeItem('token');
             setIsAuthenticated(false);
             setUser(null);
@@ -46,14 +41,16 @@ function AppContent() {
           localStorage.removeItem('token');
           setIsAuthenticated(false);
           setUser(null);
+        } finally {
+          setLoading(false);
         }
       };
       verifyToken();
     } else {
       setIsAuthenticated(false);
       setUser(null);
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
   const handleLogin = (userData) => {

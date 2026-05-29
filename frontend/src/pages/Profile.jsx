@@ -78,7 +78,7 @@ export default function Profile() {
   const fetchUserProfile = async () => {
     try {
       setLoading(true);
-      const response = await api.get("/users/profile");
+      const response = await api.get("/api/users/profile");
       setUser(response.data);
       setEditForm({
         name: response.data.name || "",
@@ -118,7 +118,7 @@ export default function Profile() {
   const handleSaveProfile = async () => {
     try {
       setSaving(true);
-      await api.put("/users/profile", editForm);
+      await api.put("/api/users/profile", editForm);
       
       // Update local user state
       setUser(prev => ({

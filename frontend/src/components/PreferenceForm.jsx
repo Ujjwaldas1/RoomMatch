@@ -125,7 +125,7 @@ export default function PreferenceForm({ user }) {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      await api.post("/users/preferences", preferences);
+      await api.post("/api/users/preferences", preferences);
       navigate("/dashboard");
     } catch (error) {
       console.error("Error saving preferences:", error);

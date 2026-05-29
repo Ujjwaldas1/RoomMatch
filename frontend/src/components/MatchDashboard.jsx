@@ -17,7 +17,7 @@ export default function MatchDashboard() {
   useEffect(() => {
     const fetchMatches = async () => {
       try {
-        const response = await api.get("/matches");
+        const response = await api.get("/api/matches");
         // Debug: log raw response data
         console.log('Fetched matches raw data:', response.data);
         // Transform backend DTO to frontend expected shape
