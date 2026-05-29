@@ -39,7 +39,7 @@ public class AuthController {
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
-    @PostMapping("/signup")
+    @PostMapping("/register")
     public ResponseEntity<Map<String, Object>> signUp(@RequestBody User newUser) {
         User existingUser = userRepository.findByEmail(newUser.getEmail());
         if (existingUser != null) {

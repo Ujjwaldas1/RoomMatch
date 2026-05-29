@@ -74,7 +74,7 @@ export default function Register({ onLogin }) {
     setError("");
 
     try {
-      const response = await api.post("/auth/signup", {
+      const response = await api.post("/api/auth/register", {
         name: formData.name,
         email: formData.email,
         password: formData.password,
